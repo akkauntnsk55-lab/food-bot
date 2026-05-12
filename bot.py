@@ -5,7 +5,7 @@ import os
 from datetime import datetime, timedelta
 import calendar
 
-TOKEN = "ТВОЙ_ТОКЕН_ЗДЕСЬ"
+TOKEN = "8568834586:AAH4XUyblCA12kE-CSpvxeESHPz3gEmY8hw"
 bot = telebot.TeleBot(TOKEN)
 
 FILE_NAME = "products.json"
