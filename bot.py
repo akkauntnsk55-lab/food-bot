@@ -31,9 +31,19 @@ def main_menu():
     return markup
 
 # --- СТАРТ ---
+from telebot import types
+
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, "🧊 Я помогу следить за сроками продуктов", reply_markup=main_menu())
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+
+    btn1 = types.KeyboardButton("🍔 Добавить продукт")
+    btn2 = types.KeyboardButton("📋 Список продуктов")
+    btn3 = types.KeyboardButton("ℹ️ Помощь")
+
+    markup.add(btn1, btn2, btn3)
+
+    bot.send_message(message.chat.id, "Выбери действие 👇", reply_markup=markup)
 
 # --- СОСТОЯНИЕ ---
 user_states = {}
