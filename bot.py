@@ -49,13 +49,28 @@ def start(message):
 user_states = {}
 
 # --- ДОБАВЛЕНИЕ ---
-@bot.message_handler(func=lambda m: m.text == "➕ Добавить продукт")
+@bot.message_handler(func=lambda m: m.text == "🍔 Добавить продукт")
 def add_product(message):
     user_states[message.chat.id] = {}
     bot.send_message(message.chat.id, "Напиши название продукта:")
 
+
+# 👉 ЛОВИМ НАЗВАНИЕ
 @bot.message_handler(func=lambda m: isinstance(user_states.get(m.chat.id), dict) and "name" not in user_states[m.chat.id])
 def get_name(message):
+    user_states[message.chat.id]["name"] = message.text
+    bot.send_message(message.chat.id, "Теперь напиши срок годности:")
+
+
+# 👉 ЛОВИМ СРОК
+@bot.message_handler(func=lambda m: isinstance(user_states.get(m.chat.id), dict) and "date" not in user_states[m.chat.id])
+def get_date(message):
+    user_states[message.chat.id]["date"] = message.text
+
+    bot.send_message(message.chat.id, "Продукт сохранён ✅")
+
+    user_states[message.chat.id] = {}
+    
     user_states[message.chat.id]["name"] = message.text
 
     markup = InlineKeyboardMarkup()
