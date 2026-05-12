@@ -44,17 +44,7 @@ def start(message):
     markup.add(btn1, btn2, btn3)
 
     bot.send_message(message.chat.id, "Выбери действие 👇", reply_markup=markup)
-    @bot.message_handler(content_types=['text'])
-def handle_text(message):
-    if message.text == "🍔 Добавить продукт":
-        bot.send_message(message.chat.id, "Напиши название продукта")
-
-    elif message.text == "📋 Список продуктов":
-        bot.send_message(message.chat.id, "Пока пусто 😄")
-
-    elif message.text == "ℹ️ Помощь":
-        bot.send_message(message.chat.id, "Это бот для продуктов 🍎")
-
+    
 # --- СОСТОЯНИЕ ---
 user_states = {}
 
@@ -186,4 +176,16 @@ def check_expiry():
 
 # запуск в фоне
 threading.Thread(target=check_expiry).start()
+
+@bot.message_handler(content_types=['text'])
+def handle_text(message):
+    if message.text == "🍔 Добавить продукт":
+        bot.send_message(message.chat.id, "Напиши название продукта")
+
+    elif message.text == "📋 Список продуктов":
+        bot.send_message(message.chat.id, "Пока пусто 😄")
+
+    elif message.text == "ℹ️ Помощь":
+        bot.send_message(message.chat.id, "Это бот для продуктов 🍎")
+
 bot.polling()
